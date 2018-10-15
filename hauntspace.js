@@ -1,3 +1,20 @@
+// Hauntspace 2.5
+// Node JS component
+//
+// Talk to the lighting server to receive messages when the lights change.
+// When the lights are out trigger the Arduino component to make a spooky sound.
+// Then flash some of the lights back on in sequence.
+// For best results hang spooky things under the appropriate lights
+//
+// Created Oct 13th
+// by Steve Barnett
+//
+// https://github.com/mooped/hauntspace-2.5
+//
+// This is a complete cludge - I ran out of time to tidy it up!
+// I will likely reimplement a more permenant version on an ESP32...
+//
+
 var WebSocket = require("ws")
 var SerialPort = require("serialport")
 
@@ -20,28 +37,6 @@ ws.on('message', function incoming(data) {
     console.log("Haunting time!");
 
     is_running = true;
-
-    /*
-    var sequence = [
-      { func: function p1() { console.log("1"); }, time: 500 },
-      { func: function p1() { console.log("2"); }, time: 500 },
-      { func: function p1() { console.log("3"); }, time: 500 },
-      { func: function p1() { console.log("4"); }, time: 500 },
-      { func: function p1() { console.log("5"); }, time: 500 },
-      { func: function flash7_on() { ws.send('{"light": 7, "eventType": "LightRequest", "state": "ON", "room": "Blue room" }'); }, time: 500 },
-      { func: function flash7_off() { ws.send('{"light": 7, "eventType": "LightRequest", "state": "OFF", "room": "Blue room" }'); }, time: 500 },
-      { func: function flash2_on() { ws.send('{"light": 2, "eventType": "LightRequest", "state": "ON", "room": "Blue room" }'); }, time: 500 },
-      { func: function flash2_off() { ws.send('{"light": 2, "eventType": "LightRequest", "state": "OFF", "room": "Blue room" }'); }, time: 500 },
-      { func: function flash9_on() { ws.send('{"light": 9, "eventType": "LightRequest", "state": "ON", "room": "Blue room" }'); }, time: 500 },
-      { func: function flash9_off() { ws.send('{"light": 9, "eventType": "LightRequest", "state": "OFF", "room": "Blue room" }'); }, time: 500 },
-      { func: function scream() { port.write("!"); console.log("Response: ", port.read()); }, time: 500 },
-      { func: function { is_running = false; }, time: 500 },
-    ];
-    */
-
-    // 7
-    // 2
-    // 9
 
     setTimeout(function flash1_on() {
       console.log("F1", is_running);

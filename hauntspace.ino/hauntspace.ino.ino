@@ -1,30 +1,24 @@
 /*
-  Arduino Starter Kit example
-  Project 5 - Servo Mood Indicator
+  Hauntspace 2.5
+  Arduino component
 
-  This sketch is written to accompany Project 5 in the Arduino Starter Kit
+  Wait for some serial data then actuate a servo.
+  The servo presses a button on a soundboard.
+  External software sends a trigger when the lights are turned off.
 
-  Parts required:
-  - servo motor
-  - 10 kilohm potentiometer
-  - two 100 uF electrolytic capacitors
+  Created 13 Oct 2012
+  by Steve Barnett
 
-  created 13 Sep 2012
-  by Scott Fitzgerald
-
-  http://www.arduino.cc/starterKit
-
-  This example code is part of the public domain.
+  https://github.com/mooped/hauntspace-2.5
 */
 
-// include the Servo library
 #include <Servo.h>
 
-Servo myServo;  // create a servo object
+Servo myServo;
 
 void setup() {
-  myServo.attach(9); // attaches the servo on pin 9 to the servo object
-  Serial.begin(9600); // open a serial connection to your computer
+  myServo.attach(9);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -40,10 +34,8 @@ void loop() {
     
     for (int angle = 0; angle < 127; ++angle)
     {
-      // set the servo position
       myServo.write(angle > 64 ? angle : 64);
 
-      // wait for the servo to get there
       delay(15);
     }
   }
