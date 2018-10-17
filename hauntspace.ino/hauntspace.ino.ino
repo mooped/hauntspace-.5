@@ -19,6 +19,7 @@ Servo myServo;
 void setup() {
   myServo.attach(9);
   Serial.begin(9600);
+  Serial.write("Boop!\r\n");
 }
 
 void loop() {
@@ -26,7 +27,7 @@ void loop() {
 
   if (Serial.available() > 0)
   {
-    Serial.write("Let's GO!");
+    Serial.write("Let's GO!\r\n");
     while (Serial.available() > 0)
     {
       Serial.write(Serial.read());
