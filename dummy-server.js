@@ -32,31 +32,32 @@ wss.on('connection', function connection(ws) {
     }
   });
 
-  // Send some fake lighting events every 10 seconds
+  // Send some fake lighting events
   setInterval(function () {
-    // Pick 4 lights
-    var light1 = getRandomInt(9);
-    var light2 = getRandomInt(9);
-    var light3 = getRandomInt(9);
-    var light4 = getRandomInt(9);
+    // Pick 4 lights to switch
+    var light1 = getRandomInt(10);
+    var light2 = getRandomInt(10);
+    var light3 = getRandomInt(10);
+    var light4 = getRandomInt(10);
 
-    // Turn them on
-    setTimeout(function () {
-      console.log(light1 + ", " + light2 + ", " + light3 + ", " + light4 + " on");
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light1 + ', "state" : "ON" }');
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light2 + ', "state" : "ON" }');
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light3 + ', "state" : "ON" }');
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light4 + ', "state" : "ON" }');
-    }, 500);
+    // Turn 1 on
+    console.log(light1 + " on");
+    ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light1 + ', "state" : "ON" }');
   
-    // Turn them off
-    setTimeout(function () {
-      console.log(light1 + ", " + light2 + ", " + light3 + ", " + light4 + " off");
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light1 + ', "state" : "OFF" }');
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light2 + ', "state" : "OFF" }');
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light3 + ', "state" : "OFF" }');
-      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light4 + ', "state" : "OFF" }');
-    }, 2000);
-  }, 5000);
+    // Turn 3 off
+    console.log(light2 + ", " + light3 + ", " + light4 + " off");
+    ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light2 + ', "state" : "OFF" }');
+    ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light3 + ', "state" : "OFF" }');
+    ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + light4 + ', "state" : "OFF" }');
+  }, 500);
+
+  // Every 10 seconds turn everything on
+  setInterval(function () {
+    console.log("All on");
+    for (var i = 1; i < 10; ++i)
+    {
+      ws.send('{ "eventType" : "LightState", "room" : "Blue room", "light" : ' + i + ', "state" : "ON" }');
+    }
+  }, 10000);
 });
 
